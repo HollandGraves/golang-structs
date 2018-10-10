@@ -27,10 +27,8 @@ func main() {
 		},
 	}
 
+	jim.updateName("Bob", "Bobby")
 	jim.print()
-	jimPointer := &jim
-	jimPointer.updateName("Bob", "Bobby")
-	jimPointer.print()
 }
 
 // DEFINED FUNCTIONS BEGIN HERE
