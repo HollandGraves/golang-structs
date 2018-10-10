@@ -2,30 +2,44 @@ package main
 
 import "fmt"
 
+// STRUCTS AND DATA TYPES BEGIN HERE
+
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
 type person struct {
 	firstName string
 	lastName  string
+	contactInfo
 }
 
+// MAIN BEGINS HERE
+
 func main() {
-	// This is one way to use a struct and add values to it, but it is not recommended because the values are assigned to the struct
-	// 		properties based upon the order, so if you ever have to swap the order of the values for any reason e.g. lastname firstname
-	// 		then you are in a world of hurt with this method
-	//
-	// alex := person{"Alex", "Anderson"}
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Jones",
+		contactInfo: contactInfo{
+			email:   "cdxx00042@gmail.com",
+			zipCode: 80501,
+		},
+	}
 
-	// This is the second way of using a struct and adding values to the structure. It is more recommend than the 1st method.
-	// 		The only difference is that you're adding the value directly to the specific struc property you'd like the value assigned to
-	//
-	// alex := person{
-	// 	firstName: "Alex",
-	// 	lastName:  "Anderson"}
+	jim.print()
+	jimPointer := &jim
+	jimPointer.updateName("Bob", "Bobby")
+	jimPointer.print()
+}
 
-	var alex person
+// DEFINED FUNCTIONS BEGIN HERE
 
-	alex.firstName = "Alex"
-	alex.lastName = "Anderson"
+func (pointerToPerson *person) updateName(newfirstname string, newlastname string) {
+	(*pointerToPerson).firstName = newfirstname
+	(*pointerToPerson).lastName = newlastname
+}
 
-	fmt.Println(alex)
-	fmt.Printf("%+v", alex)
+func (pointerToPerson *person) print() {
+	fmt.Printf("%+v", pointerToPerson)
 }
